@@ -5,7 +5,12 @@ void main() => runApp(QuizApp());
 class QuizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text('Hello, flutter!'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Quiz'),
+        ),
+        body: Text('Hello, flutter!'),
+      ),
     );
   }
 }
