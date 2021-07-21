@@ -27,9 +27,9 @@ class _QuizAppState extends State<QuizApp> {
         body: Column(
           children: [
             Question(questions[_selectedQuestion]),
-            Answer('Answer 1'),
-            Answer('Answer 2'),
-            Answer('Answer 3'),
+            Answer('Answer 1', _answer),
+            Answer('Answer 2', _answer),
+            Answer('Answer 3', _answer),
           ],
         ),
       ),
