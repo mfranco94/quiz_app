@@ -15,7 +15,7 @@ class _QuizAppState extends State<QuizApp> {
 
   Widget build(BuildContext context) {
     final questions = [
-      "'What's your favorite color?",
+      "What's your favorite color?",
       "What's your favorite pet?",
     ];
     return MaterialApp(
