@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
 void main() => runApp(QuizApp());
 
-class QuizApp extends StatelessWidget {
+class _QuizAppState extends State<QuizApp> {
+  var _selectedQuestion = 0;
+
+  void _answer() {
+    setState(() {
+      _selectedQuestion++;
+      print(_selectedQuestion);
+    });
+  }
+
   Widget build(BuildContext context) {
     final questions = [
       "'What's your favorite color?",
@@ -15,22 +25,28 @@ class QuizApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(questions[0]),
+            Question(questions[_selectedQuestion]),
             ElevatedButton(
               child: Text('Answer 1'),
-              onPressed: null,
+              onPressed: _answer,
             ),
             ElevatedButton(
-              child: Text('Answer 1'),
-              onPressed: null,
+              child: Text('Answer 2'),
+              onPressed: _answer,
             ),
             ElevatedButton(
-              child: Text('Answer 1'),
-              onPressed: null,
+              child: Text('Answer 3'),
+              onPressed: _answer,
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class QuizApp extends StatefulWidget {
+  _QuizAppState createState() {
+    return _QuizAppState();
   }
 }
