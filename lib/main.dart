@@ -16,9 +16,24 @@ class _QuizAppState extends State<QuizApp> {
 
   Widget build(BuildContext context) {
     final questions = [
-      "What's your favorite color?",
-      "What's your favorite pet?",
+      {
+        "text": "What's your favorite color?",
+        "answers": ["Black", "White", "Blue", "Red"],
+      },
+      {
+        "text": "What's your favorite pet?",
+        "answers": ["Dog", "Cat" "Snake", "Bird", "Mouse"],
+      },
+      {
+        "text": "What's your favorite teacher?",
+        "answers": ["Mary", "John", "Wilson", "Jane"]
+      }
     ];
+    List<Widget> answers = [];
+    for (String answerText in questions[_selectedQuestion].cast()["answers"]) {
+      answers.add(Answer(answerText, _answer));
+    }
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -26,10 +41,8 @@ class _QuizAppState extends State<QuizApp> {
         ),
         body: Column(
           children: [
-            Question(questions[_selectedQuestion]),
-            Answer('Answer 1', _answer),
-            Answer('Answer 2', _answer),
-            Answer('Answer 3', _answer),
+            Question(questions[_selectedQuestion]["text"].toString()),
+            ...answers,
           ],
         ),
       ),
