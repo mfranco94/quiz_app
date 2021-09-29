@@ -1,30 +1,53 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './result.dart';
+import './quiz.dart';
 
 void main() => runApp(QuizApp());
 
 class _QuizAppState extends State<QuizApp> {
   var _selectedQuestion = 0;
+  var _totalPoints = 0;
   final _questions = [
     {
       "text": "What's your favorite color?",
-      "answers": ["Black", "White", "Blue", "Red"],
+      "answers": [
+        {"text": "Black", "point": 10},
+        {"text": "White", "point": 5},
+        {"text": "Blue", "point": 3},
+        {"text": "Red", "point": 1},
+      ],
     },
     {
       "text": "What's your favorite pet?",
-      "answers": ["Dog", "Cat" "Snake", "Bird", "Mouse"],
+      "answers": [
+        {"text": "Dog", "point": 10},
+        {"text": "Cat" "Snake", "point": 5},
+        {"text": "Bird", "point": 3},
+        {"text": "Mouse", "point": 1},
+      ],
     },
     {
       "text": "What's your favorite teacher?",
-      "answers": ["Mary", "John", "Wilson", "Jane"]
+      "answers": [
+        {"text": "Mary", "point": 10},
+        {"text": "John", "point": 5},
+        {"text": "Wilson", "point": 3},
+        {"text": "Jane", "point": 1},
+      ]
     }
   ];
 
-  void _answer() {
+  void _answer(int point) {
     setState(() {
       _selectedQuestion++;
-      print(_selectedQuestion);
+      _totalPoints += point;
+    });
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _selectedQuestion = 0;
+      _totalPoints = 0;
     });
   }
 
@@ -33,23 +56,18 @@ class _QuizAppState extends State<QuizApp> {
   }
 
   Widget build(BuildContext context) {
-    List<String> answers = hasSelectedQuestion
-        ? _questions[_selectedQuestion].cast()["answers"]
-        : [];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Quiz'),
         ),
         body: hasSelectedQuestion
-            ? Column(
-                children: [
-                  Question(_questions[_selectedQuestion]["text"].toString()),
-                  ...answers.map((t) => Answer(t, _answer)).toList(),
-                ],
+            ? Quiz(
+                questions: _questions,
+                selectedQuestion: _selectedQuestion,
+                answer: _answer,
               )
-            : null,
+            : Result(_totalPoints, _resetQuiz),
       ),
     );
   }
